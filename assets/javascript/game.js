@@ -5,7 +5,7 @@ var dinosaur = {
     "allosaurus", "ankylosaurus", "brachiosaurus", "bravoceratops", 
     "deinodon", "diplodocus", "fruitadens", "hadrosaurus", 
     "iguanodon", "nyasasaurus", "raptorex", "sinosauropteryx", 
-    "spinosaurus", "talarurus", "triceratops", "tyrannosaurus rex", 
+    "spinosaurus", "talarurus", "triceratops", "tyrannosaurus", 
     "uteodon", "velociraptor",  "yutyrannus"
     ],
     //ARRAY OF DINO PICTURES
@@ -88,6 +88,16 @@ var guessLeft = 10;
 var correctGuess = [];
 //set variable array to store incorrect guess
 var wrongGuess = [];
+//bite audio
+var biteAudio = new Audio('assets/sounds/bite.wav');
+//correct audio
+var correctAudio = new Audio('assets/sounds/correct.wav');
+//array of exceptable input
+var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+//variable for wins
+var wins = "0";
+//variable for losses
+var deaths = "0";
 
 //=========FUNCTION TO RESET AND UPDATE GAMEBOARD===================
 function resetGameBoard(gameBoard, correctGuess, wrongGuess) {
@@ -109,37 +119,79 @@ function resetGameBoard(gameBoard, correctGuess, wrongGuess) {
 }
 
 //==============EVENT LISTENER===========================
-
 document.onkeyup = function(event) {
     //variable for event key
-    letterPressed = event.key;
+    letterPressed = event.key.toLowerCase();
     //variable for wrong guess trigger
     var wGuess = true;
+    var uWin = 0;
 
-    //if the letter has not been pressed
+    //if the letter has not been pressed and is indeed a letter
+if (alphabet.indexOf(letterPressed.toLowerCase()) != -1) {
     if ((correctGuess.indexOf(letterPressed) === -1 ) && (wrongGuess.indexOf(letterPressed) === -1)) {
        
+            //see if the letter pressed matches inside the word
             for (i=0;i<dinoWord.length;i++) {
                 if (dinoWord[i] === letterPressed) {
                     wGuess = false;
                     gameBoard[i] = letterPressed;
                     if (correctGuess.indexOf(letterPressed) === -1) {
                         correctGuess.push(letterPressed);
+                        correctAudio.play();
                     }
                 }   
             }
 
+        //update the wrong guess array, play the bite sound, subtract guesses left, change picture
         if (wGuess === true) {
             wrongGuess.push(letterPressed);
+            guessLeft--;
+            document.getElementById("guessLeft").innerHTML = guessLeft;
+            biteAudio.play();
+            document.getElementById("dummy").innerHTML = "<img src='assets/images/dummy" + guessLeft +".jpg' class='card-img-top' />";
         }
+        
+        //checks to see if the game is won
+        gameBoard.forEach(function is(letter) {
+            if (alphabet.indexOf(letter) != -1) {
+                uWin++;
+            }
+        })
+
+        //if the game is won alert the user, update wins, and reset the board
+        if (uWin === dinoWord.length) {
+            alert("You know your dinosaurs!");
+            guessLeft = 10;
+            correctGuess = [];
+            wrongGuess = [];
+            gameBoard = dinosaur.setStage();
+            dinoWord = gameBoard.pop();
+            wins++;
+            resetGameBoard(gameBoard, correctGuess, wrongGuess);
+            document.getElementById("guessLeft").innerHTML = guessLeft;
+            document.getElementById("dummy").innerHTML = "<img src='assets/images/dummy10.jpg' class='card-img-top' />";
+            document.getElementById("wins").innerHTML = wins;
+        }
+
+        //if the game is lost alert the user, update losses, and reset the board
+        if (guessLeft < 1) {
+            alert("Your Dummy was eaten by the " + dinoWord);
+            guessLeft = 10;
+            correctGuess = [];
+            wrongGuess = [];
+            gameBoard = dinosaur.setStage();
+            dinoWord = gameBoard.pop();
+            deaths++;
+            resetGameBoard(gameBoard, correctGuess, wrongGuess);
+            document.getElementById("guessLeft").innerHTML = guessLeft;
+            document.getElementById("dummy").innerHTML = "<img src='assets/images/dummy10.jpg' class='card-img-top' />";
+            document.getElementById("losses").innerHTML = deaths;
+        }
+        else {
+        //refresh the board stats if there is not a win or a loss
         resetGameBoard(gameBoard, correctGuess, wrongGuess);
         }
+        }
+}
 }
 
-
-
-/*if (dinoWord[i] !== letterPressed) {
-    if (wrongGuess.indexOf(letterPressed) === -1) {
-            wrongGuess.push(letterPressed);
-    }
-}*/

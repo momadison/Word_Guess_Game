@@ -10,25 +10,68 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
 </head>
 <header>
-    <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron py-1">
                 <h1 class="display-4 px-auto">WELCOME TO THE WORD OF DINOSAURS</h1>
-                <p class="lead px-auto">Can you guess what dinosaur I am before I eat you</p>
+                <p class="lead ml-auto">Can you guess what dinosaur I am before your dummy gets eaten!</p>
         </div>
-    </div>
 </header>
 <body>
-    <div class="container">
-    <div class="card" style="width: 18rem;">
-            <div id="dinoPic"><img src="..." class="card-img-top" alt="..."></div>
-        <div class="card-body">
-            <p class="card-text" id="dinoDes"></p>
+<div class="container py-4" id="contentWrapper">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div id="dinoPic"><img src="..." class="card-img-top" alt="..."></div>
+            <div class="card-body">
+                <h5 class="card-title">Hint</h5>
+                <p class="card-text" id="dinoDes"></p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                          LETTERS GUESSED
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Wrong</li>
+                          <li class="list-group-item" id="wrongGuess"></li>
+                          <li class="list-group-item">Correct</li>
+                          <li class="list-group-item" id="correctGuess"></li>
+                        </ul>
+                        <div class="card-header">
+                            WINS
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" id="wins">0</li>
+                        </ul>
+                        <div class="card-header">
+                            DEATHS
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" id="losses">0</li>
+                        </ul>
+                </div>
+        </div>
+        <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div id="dummy"><img src="assets/images/dummy10.jpg" class="card-img-top" /></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Guesses Left</h5>
+                        <p class="card-text px-auto" id="guessLeft">10</p>
+                    </div>
+                </div>
         </div>
     </div>
-        
-        <div id="guessBoard"></div>
-<p id="wrongGuess"></p>
-<p id="correctGuess"></p>
+</div>
+<div class="container" id="gameWrapper">
+    <div class="row px-auto mx-auto pt-4">
+        <div class="col-12" id="centerthis">
+            <p id="guessBoard"></p>
+        </div>
+    </div>
+</div>
+
+
 
 </div>
 <script src="assets/javascript/game.js"></script>    
