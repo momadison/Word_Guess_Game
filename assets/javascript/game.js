@@ -1,12 +1,12 @@
 //=================DINOSAUR WORD GAME OBJECT===================
    //ARRAY OF DINO WORDS
-var dinosaur = {
+   var dinosaur = {
     dinoWords: [
     "allosaurus", "ankylosaurus", "brachiosaurus", "bravoceratops", 
     "deinodon", "diplodocus", "fruitadens", "hadrosaurus", 
     "iguanodon", "nyasasaurus", "raptorex", "sinosauropteryx", 
     "spinosaurus", "talarurus", "triceratops", "tyrannosaurus", 
-    "uteodon", "velociraptor",  "yutyrannus"
+    "uteodon", "velociraptor",  "yutyrannus","mosasaurus"
     ],
     //ARRAY OF DINO PICTURES
     dinoPics: [
@@ -14,7 +14,8 @@ var dinosaur = {
     "assets/images/deinodon.jpg", "assets/images/diplodocus.jpg", "assets/images/fruitadens.jpg", "assets/images/hadrosaurus.jpg", 
     "assets/images/iguanodon.jpg", "assets/images/nyasasaurus.jpg", "assets/images/raptorex.jpg", "assets/images/sinosauropteryx.jpg", 
     "assets/images/spinosaurus.jpg", "assets/images/talarurus.jpg", "assets/images/triceratops.jpg", "assets/images/tyrannosaurus.jpg", 
-    "assets/images/uteodon.jpg", "assets/images/velociraptor.jpg",  "assets/images/yutyrannus.jpg"
+    "assets/images/uteodon.jpg", "assets/images/velociraptor.jpg",  "assets/images/yutyrannus.jpg","https://vignette.wikia.nocookie.net/dinocrisis/images/c/c4/Mosasaurus.jpg/revision/latest?cb=20100806075501"
+
     ],
     //ARRAY OF DINO DESCRIPTIONS
     dinoInfo: [
@@ -27,7 +28,7 @@ var dinosaur = {
     "This dinosaur was distinguished by the sail like structure on it's back", "This ankylosaur was discovered in the Gobi Desert",
     "The famous, three horned plant eating dinosaur", "The once and always king of the dinosaurs",
     "It was once classified as a species of Camptosaurus", "This dinosaur was vicious but a lot smaller than you thought",
-    "The largest feathered tyrannosaur yet identified"
+    "The largest feathered tyrannosaur yet identified","This giant sea monster eats its own babies if it can't find food"
     ],
     
     //PICK RANDOM DINO ALONG WITH CORRESPONDING PICTURE AND INFO
@@ -150,7 +151,7 @@ if (alphabet.indexOf(letterPressed.toLowerCase()) != -1) {
             biteAudio.play();
             document.getElementById("dummy").innerHTML = "<img src='assets/images/dummy" + guessLeft +".jpg' class='card-img-top' />";
         }
-        
+
         //checks to see if the game is won
         gameBoard.forEach(function is(letter) {
             if (alphabet.indexOf(letter) != -1) {
